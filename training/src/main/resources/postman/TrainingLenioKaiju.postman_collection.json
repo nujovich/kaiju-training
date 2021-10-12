@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "0b636f7f-73f5-49a3-b990-75b6ed7b0a62",
+		"name": "TrainingLenioKaiju",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Kaiju",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"dna\" : \"123jmg456\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/lenio-training/kaiju/v1/dna",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lenio-training",
+						"kaiju",
+						"v1",
+						"dna"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Stats type",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/lenio-training/kaiju/v1/stats?kaijuType=ALL",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lenio-training",
+						"kaiju",
+						"v1",
+						"stats"
+					],
+					"query": [
+						{
+							"key": "kaijuType",
+							"value": "ALL"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
