@@ -4,6 +4,8 @@ import com.leniolabs.training.model.KaijuType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 
 @Component
 public class KaijuTypeCalculator {
@@ -12,20 +14,10 @@ public class KaijuTypeCalculator {
     private KaijuDNADecoder dnaDecoder;
 
     public KaijuType calculateTypeFromDNA(String dna) {
-        KaijuType type = KaijuType.UNKNOWN;
         Integer maxValue = dnaDecoder.decodeDNA(dna);
-        if (KaijuType.ONE.isBetweenItsMaxAndMin(maxValue)) {
-            type = KaijuType.ONE;
-        }
-
-        if (KaijuType.TWO.isBetweenItsMaxAndMin(maxValue)) {
-            type = KaijuType.TWO;
-        }
-
-        if (KaijuType.THREE.isBetweenItsMaxAndMin(maxValue)) {
-            type = KaijuType.THREE;
-        }
-        return type;
+        return Arrays.stream(KaijuType.values())
+                .filter(kaijuType -> kaijuType.isBetweenItsMaxAndMin(maxValue))
+                .findFirst()
+                .orElseGet(() -> KaijuType.UNKNOWN);
     }
-
 }

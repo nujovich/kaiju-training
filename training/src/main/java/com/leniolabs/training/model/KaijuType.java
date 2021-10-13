@@ -2,7 +2,7 @@ package com.leniolabs.training.model;
 
 public enum KaijuType {
 
-    ALL(0, 23),
+    ALL(0, 0),
     ONE(10, 13),
     TWO(14, 18),
     THREE(18, 22),

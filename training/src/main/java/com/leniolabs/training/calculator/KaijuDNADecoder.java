@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 @Component
@@ -28,12 +29,11 @@ public class KaijuDNADecoder {
         while(limit <= numbers.length) {
             String groupOfNumbers = numbersJoined.substring(initialIndex, limit);
             Integer sumOfEachNumber = sumEachDigit(groupOfNumbers);
+            maxNumber = sumOfEachNumber > maxNumber ? sumOfEachNumber : maxNumber;
             //sumOfNumbersMap.put(groupOfNumbers, sumOfEachNumber);
             initialIndex++;
             limit++;
-            maxNumber = sumOfEachNumber > maxNumber ? sumOfEachNumber : maxNumber;
         }
-        System.out.println(maxNumber);
         return maxNumber;//Collections.max(sumOfNumbersMap.values());
     }
 
