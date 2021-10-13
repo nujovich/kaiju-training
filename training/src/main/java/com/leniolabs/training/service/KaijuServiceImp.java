@@ -6,6 +6,7 @@ import com.leniolabs.training.controller.dto.KaijuTypePercentage;
 import com.leniolabs.training.model.Kaiju;
 import com.leniolabs.training.model.KaijuType;
 import com.leniolabs.training.repository.KaijuRepository;
+import com.leniolabs.training.utils.ResponseMessageConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -33,9 +34,6 @@ public class KaijuServiceImp implements KaijuService {
         this.repository = repository;
         this.unknownPercentageAllowed = unknownPercentageAllowed;
     }
-
-    protected final static String UNKNOWN_SAMPLES_REACHED_THRESHOLD = "UNKNOWN SAMPLES REACHED THRESHOLD";
-    protected final static String UNKNOWN_SAMPLES_UNDER_ACCEPTED_THRESHOLD = "UNKNOWN SAMPLES UNDER ACCEPTED THRESHOLD";
 
     @Override
     public KaijuType createKaiju(String dna) {
@@ -82,7 +80,7 @@ public class KaijuServiceImp implements KaijuService {
         }
 
         String message = unknownPercentage > Double.valueOf(unknownPercentageAllowed) ?
-                UNKNOWN_SAMPLES_REACHED_THRESHOLD : UNKNOWN_SAMPLES_UNDER_ACCEPTED_THRESHOLD;
+                ResponseMessageConstants.UNKNOWN_SAMPLES_REACHED_THRESHOLD : ResponseMessageConstants.UNKNOWN_SAMPLES_UNDER_ACCEPTED_THRESHOLD;
         kaijuResponseDTO.setMessage(message);
 
         return kaijuResponseDTO;

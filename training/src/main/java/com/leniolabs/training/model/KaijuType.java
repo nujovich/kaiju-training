@@ -14,19 +14,15 @@ public enum KaijuType {
         return min;
     }
 
-    public void setMin(int min) {
-        this.min = min;
-    }
-
     public int getMax() {
         return max;
     }
 
-    public void setMax(int max) {
-        this.max = max;
+    public boolean isBetweenItsMaxAndMin(Integer value) {
+        return this.getMin() <= value &&  value <= this.getMax();
     }
 
-    KaijuType(int min, int max) {
+    private KaijuType(int min, int max) {
         this.min = min;
         this.max = max;
     }

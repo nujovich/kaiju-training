@@ -4,6 +4,7 @@ import com.leniolabs.training.calculator.KaijuTypeCalculator;
 import com.leniolabs.training.controller.dto.KaijuTypePercentage;
 import com.leniolabs.training.model.Kaiju;
 import com.leniolabs.training.repository.KaijuRepository;
+import com.leniolabs.training.utils.ResponseMessageConstants;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -11,15 +12,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.leniolabs.training.controller.dto.KaijuResponseDTO;
 import com.leniolabs.training.model.KaijuType;
-import com.leniolabs.training.service.KaijuService;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -88,7 +84,7 @@ public class KaijuServiceTest {
         List<KaijuType> kaijuTypes = Arrays.asList(KaijuType.ONE);
         when(kaijuRepository.findAllKaijuType()).thenReturn(kaijuTypes);
         KaijuTypePercentage kaijuTypePercentage = new KaijuTypePercentage(KaijuType.ONE, 100.00);
-        KaijuResponseDTO expectedResponse = buildKaijuResponseGTO(Arrays.asList(kaijuTypePercentage), KaijuServiceImp.UNKNOWN_SAMPLES_UNDER_ACCEPTED_THRESHOLD);
+        KaijuResponseDTO expectedResponse = buildKaijuResponseGTO(Arrays.asList(kaijuTypePercentage), ResponseMessageConstants.UNKNOWN_SAMPLES_UNDER_ACCEPTED_THRESHOLD);
 
         // When
         KaijuResponseDTO gottenResponse = underTest.getPercentageOfSamplesEvaluated(KaijuType.ONE);
@@ -110,7 +106,7 @@ public class KaijuServiceTest {
         List<KaijuType> kaijuTypes = Arrays.asList(KaijuType.ONE, KaijuType.THREE);
         when(kaijuRepository.findAllKaijuType()).thenReturn(kaijuTypes);
         KaijuTypePercentage kaijuTypePercentage = new KaijuTypePercentage(KaijuType.ONE, 50.00);
-        KaijuResponseDTO expectedResponse = buildKaijuResponseGTO(Arrays.asList(kaijuTypePercentage), KaijuServiceImp.UNKNOWN_SAMPLES_UNDER_ACCEPTED_THRESHOLD);
+        KaijuResponseDTO expectedResponse = buildKaijuResponseGTO(Arrays.asList(kaijuTypePercentage), ResponseMessageConstants.UNKNOWN_SAMPLES_UNDER_ACCEPTED_THRESHOLD);
 
         // When
         KaijuResponseDTO gottenResponse = underTest.getPercentageOfSamplesEvaluated(KaijuType.ONE);
@@ -132,7 +128,7 @@ public class KaijuServiceTest {
         List<KaijuType> kaijuTypes = Arrays.asList(KaijuType.ONE, KaijuType.THREE, KaijuType.TWO, KaijuType.UNKNOWN, KaijuType.UNKNOWN, KaijuType.ONE);
         when(kaijuRepository.findAllKaijuType()).thenReturn(kaijuTypes);
         KaijuTypePercentage kaijuTypePercentage = new KaijuTypePercentage(KaijuType.ONE, 33.0);
-        KaijuResponseDTO expectedResponse = buildKaijuResponseGTO(Arrays.asList(kaijuTypePercentage), KaijuServiceImp.UNKNOWN_SAMPLES_UNDER_ACCEPTED_THRESHOLD);
+        KaijuResponseDTO expectedResponse = buildKaijuResponseGTO(Arrays.asList(kaijuTypePercentage), ResponseMessageConstants.UNKNOWN_SAMPLES_UNDER_ACCEPTED_THRESHOLD);
 
         // When
         KaijuResponseDTO gottenResponse = underTest.getPercentageOfSamplesEvaluated(KaijuType.ONE);
@@ -158,7 +154,7 @@ public class KaijuServiceTest {
         KaijuTypePercentage kaijuTypePercentageThree = new KaijuTypePercentage(KaijuType.THREE, 16.0);
         KaijuTypePercentage kaijuTypePercentageTwo = new KaijuTypePercentage(KaijuType.TWO, 16.0);
         KaijuResponseDTO expectedResponse = buildKaijuResponseGTO(Arrays.asList(kaijuTypePercentageOne, kaijuTypePercentageThree, kaijuTypePercentageUnknown, kaijuTypePercentageTwo)
-                , KaijuServiceImp.UNKNOWN_SAMPLES_UNDER_ACCEPTED_THRESHOLD);
+                , ResponseMessageConstants.UNKNOWN_SAMPLES_UNDER_ACCEPTED_THRESHOLD);
 
         // When
         KaijuResponseDTO gottenResponse = underTest.getPercentageOfSamplesEvaluated(KaijuType.ALL);
@@ -168,7 +164,7 @@ public class KaijuServiceTest {
         List<KaijuTypePercentage> gottenKaijuTypePercentages = gottenResponse.getKaijuTypePercentages();
         assertFalse(CollectionUtils.isEmpty(gottenKaijuTypePercentages));
         assertEquals(KaijuType.values().length -1 , gottenKaijuTypePercentages.size()); //Type ALL is not evaluated in a particular way
-        assertEquals(gottenResponse.getMessage(), KaijuServiceImp.UNKNOWN_SAMPLES_UNDER_ACCEPTED_THRESHOLD);
+        assertEquals(gottenResponse.getMessage(), ResponseMessageConstants.UNKNOWN_SAMPLES_UNDER_ACCEPTED_THRESHOLD);
         expectedResponse.getKaijuTypePercentages().stream().forEach(expectedKaijuTypePercentage -> {
             KaijuTypePercentage kaijuTypePercentage = gottenKaijuTypePercentages.stream().filter(gottenKaijuTypePercentage -> expectedKaijuTypePercentage.getKaijuType()
                     .equals(gottenKaijuTypePercentage.getKaijuType()))
