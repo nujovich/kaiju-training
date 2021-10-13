@@ -25,16 +25,14 @@ public class KaijuDNADecoder {
         int initialIndex = 0;
         int limit = k;
         int maxNumber = 0;
-        //Map<String, Integer> sumOfNumbersMap = new HashMap<>();
         while(limit <= numbers.length) {
             String groupOfNumbers = numbersJoined.substring(initialIndex, limit);
             Integer sumOfEachNumber = sumEachDigit(groupOfNumbers);
             maxNumber = sumOfEachNumber > maxNumber ? sumOfEachNumber : maxNumber;
-            //sumOfNumbersMap.put(groupOfNumbers, sumOfEachNumber);
             initialIndex++;
             limit++;
         }
-        return maxNumber;//Collections.max(sumOfNumbersMap.values());
+        return maxNumber;
     }
 
     private Integer sumEachDigit(String number) {

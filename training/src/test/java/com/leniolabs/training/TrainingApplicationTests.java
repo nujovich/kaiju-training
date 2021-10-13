@@ -12,9 +12,4 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ActiveProfiles("test")
-public abstract class TrainingApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-}
+public abstract class TrainingApplicationTests {}

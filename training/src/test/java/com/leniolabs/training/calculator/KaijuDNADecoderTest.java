@@ -3,9 +3,7 @@ package com.leniolabs.training.calculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -35,16 +33,15 @@ public class KaijuDNADecoderTest {
     public void decodeDNA_shorterCase() {
         // Given
         String dna = "123jmg456";
-        //6
-        //9
-        //12
-        //15
+        //123 = 6
+        //234 = 9
+        //345 = 12
+        //456 = 15
 
         // When
         Integer gottenMaxValue = underTest.decodeDNA(dna);
 
         //Then
-        assertEquals(15 ,gottenMaxValue);
+        assertEquals(15, gottenMaxValue);
     }
-
 }

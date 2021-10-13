@@ -5,6 +5,7 @@ import com.leniolabs.training.controller.dto.RequestKaijuDTO;
 import com.leniolabs.training.model.KaijuType;
 import com.leniolabs.training.service.KaijuService;
 import com.leniolabs.training.utils.RegexConstants;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,6 @@ public class KaijuController {
     }
 
     @GetMapping("/stats")
-    @ResponseBody
     public ResponseEntity<KaijuResponseDTO> getStats(@RequestParam KaijuType kaijuType){
         KaijuType type = kaijuType == null ? KaijuType.ALL : kaijuType;
         KaijuResponseDTO responseDTO = kaijuService.getPercentageOfSamplesEvaluated(type);
