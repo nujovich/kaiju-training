@@ -10,12 +10,14 @@ import com.leniolabs.training.repository.KaijuRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -50,6 +52,7 @@ public class CreateKaijuTest extends TrainingApplicationTests {
         //Then
         KaijuType responseKaijuType = endpointUtil.getResponseObject(mvcResult, KaijuType.class);
         assertEquals(KaijuType.TWO,responseKaijuType);
+        verify(kaijuRepository, times(1)).findByDna(eq(dna));
         verify(kaijuRepository, times(1)).save(any(Kaiju.class));
         verifyNoMoreInteractions(kaijuRepository);
     }
@@ -75,11 +78,13 @@ public class CreateKaijuTest extends TrainingApplicationTests {
                 .andReturn();
 
         // Then
-        KaijuType responseKaijuTypeSecondCall = endpointUtil.getResponseObject(mvcResult, KaijuType.class);
-        assertEquals(KaijuType.TWO,responseKaijuType);
+        KaijuType responseKaijuTypeSecondCall = endpointUtil.getResponseObject(mvcResultSecondCall, KaijuType.class);
+        assertEquals(KaijuType.TWO,responseKaijuTypeSecondCall);
 
+        verify(kaijuRepository, times(2)).findByDna(eq(dna));
         // There was only one interaction since the entity under that dna was already created
         verify(kaijuRepository, times(1)).save(any(Kaiju.class));
+        verifyNoMoreInteractions(kaijuRepository);
     }
 
 }

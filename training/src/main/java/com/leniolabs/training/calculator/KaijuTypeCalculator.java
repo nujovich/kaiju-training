@@ -14,15 +14,15 @@ public class KaijuTypeCalculator {
     public KaijuType calculateTypeFromDNA(String dna) {
         KaijuType type = KaijuType.UNKNOWN;
         Integer maxValue = dnaDecoder.decodeDNA(dna);
-        if (10 <= maxValue &&  maxValue <= 13) {
+        if (KaijuType.ONE.getMin() <= maxValue &&  maxValue <= KaijuType.ONE.getMax()) {
             type = KaijuType.ONE;
         }
 
-        if (14 <= maxValue &&  maxValue <= 18) {
+        if (KaijuType.TWO.getMin() <= maxValue &&  maxValue <= KaijuType.TWO.getMax()) {
             type = KaijuType.TWO;
         }
 
-        if (18 <= maxValue &&  maxValue <= 22) {
+        if (KaijuType.THREE.getMin() <= maxValue &&  maxValue <= KaijuType.THREE.getMax()) {
             type = KaijuType.THREE;
         }
         return type;

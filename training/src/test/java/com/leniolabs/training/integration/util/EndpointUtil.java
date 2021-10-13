@@ -51,23 +51,6 @@ public class EndpointUtil {
         return mapper.readValue(contentAsString, t);
     }
 
-    public <T> List<T> getResponseListOfObjects(MvcResult result, Class<T> t) throws IOException {
-        String contentAsString = result.getResponse().getContentAsString();
-        return (List<T>) mapper.readValue(contentAsString, List.class).stream().map(campaign -> mapper.convertValue(campaign, t)).collect(Collectors.toList());
-    }
-
-    public ResultActions deleteCall(String path) throws Exception {
-        return mockMvc.perform(MockMvcRequestBuilders.delete(path));
-    }
-
-    public ResultActions deleteCall(String path, Object content) throws Exception {
-        return mockMvc.perform(addBasicInformation(MockMvcRequestBuilders.delete(path).content(mapper.writeValueAsString(content))));
-    }
-
-    public ResultActions putCall(String path, Object content) throws Exception {
-        return mockMvc.perform(addBasicInformation(MockMvcRequestBuilders.put(path).content(mapper.writeValueAsString(content))));
-    }
-
     private MockHttpServletRequestBuilder addBasicInformation(MockHttpServletRequestBuilder mockHttpServletRequestBuilder) {
         return mockHttpServletRequestBuilder
                 .contentType(MediaType.APPLICATION_JSON)
