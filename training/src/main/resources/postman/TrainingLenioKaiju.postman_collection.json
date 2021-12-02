@@ -22,7 +22,7 @@
 					"raw": "{\n\"dna\" : \"123jmg456\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/lenio-training/kaiju/v1/dna",
+					"raw": "https://training-kaiju.herokuapp.com/lenio-training/lenio-training/kaiju/v1/dna",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -58,7 +58,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/lenio-training/kaiju/v1/stats?kaijuType=ALL",
+					"raw": "http://training-kaiju.herokuapp.com/lenio-training/lenio-training/kaiju/v1/stats?kaijuType=ALL",
 					"protocol": "http",
 					"host": [
 						"localhost"
