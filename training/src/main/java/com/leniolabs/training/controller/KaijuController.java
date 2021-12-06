@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "https://ul33g.csb.app/", maxAge = 3600)
 @RestController
 @RequestMapping("/lenio-training/kaiju/v1")
 public class KaijuController {
